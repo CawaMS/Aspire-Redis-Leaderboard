@@ -1,4 +1,3 @@
-using AspireAARedis.ApiService;
 using StackExchange.Redis;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,8 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire components.
 builder.AddServiceDefaults();
+
 // Add Redis cache
-builder.Services.AddSingleton(async x => await RedisConnection.InitializeAsync("cache"));
+builder.AddRedisClient("cache");
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
@@ -18,7 +18,8 @@ var app = builder.Build();
 app.UseExceptionHandler();
 
 // Get Redis connection
-var _redisConnectionFactory = app.Services.GetRequiredService<Task<RedisConnection>>();
+var _redisConnectionMultiplexer = app.Services.GetRequiredService<IConnectionMultiplexer>();
+IDatabase db = _redisConnectionMultiplexer.GetDatabase();
 
 var summaries = new[]
 {
@@ -40,16 +41,9 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/leaderboard", async () =>
 {
-    RedisConnection _redisConnection = await _redisConnectionFactory;
-
-    var players = await _redisConnection.BasicRetryAsync(async (db) => (await db.SortedSetRangeByRankWithScoresAsync("gameScoreSortedSet", order: Order.Descending))
-            .Select(p => new Player
-            {
-                Name = p.Element,
-                Score = (int)p.Score
-            })
-            .ToList()
-            );
+    var players = (await db.SortedSetRangeByRankWithScoresAsync("gameScoreSortedSet", order: Order.Descending))
+                    .Select(x => new Player { Name = x.Element, Score = (int)x.Score })
+                    .ToList();
 
     return players;
 });
@@ -63,9 +57,9 @@ app.MapPost("/players/{name}", async (string name) =>
         Score = rand.Next(0, 1000)
     };
 
-    RedisConnection _redisConnection = await _redisConnectionFactory;
+    //RedisConnection _redisConnection = await _redisConnectionFactory;
 
-    await _redisConnection.BasicRetryAsync(async (db) => await db.SortedSetUpdateAsync("gameScoreSortedSet", player.Name, player.Score));
+    await db.SortedSetUpdateAsync("gameScoreSortedSet", player.Name, player.Score);
 });
 
 app.MapDefaultEndpoints();
