@@ -1,0 +1,55 @@
+﻿@page "/leaderboard"
+@rendermode InteractiveServer
+
+@inject LeaderboardApiClient LeaderboardApi
+
+<PageTitle>Leaderboard</PageTitle>
+
+<h1>Leaderboard</h1>
+
+<p>This component demonstrates Redis powered game leaderboard</p>
+
+@if (players == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in players)
+            {
+                <tr>
+                    <td>@player.Name</td>
+                    <td>@player.Score</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+Enter player name:
+<input type="text" @bind="playerName" />
+
+<button class="btn btn-primary" @onclick="PlayGame">Play Game</button>
+
+@code {
+    private Player[]? players;
+    string playerName;
+
+    private async Task PlayGame()
+    {
+        await LeaderboardApi.PostPlayerAsync(playerName);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        players = await LeaderboardApi.GetLeaderboardAsync();
+    }
+}

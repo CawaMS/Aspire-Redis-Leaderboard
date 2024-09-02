@@ -1,0 +1,12 @@
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\bin\Debug\net8.0\AspireAARedis.ServiceDefaults.deps.json
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\bin\Debug\net8.0\AspireAARedis.ServiceDefaults.dll
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\bin\Debug\net8.0\AspireAARedis.ServiceDefaults.pdb
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\AspireAARedis.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\AspireAARedis.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\AspireAARedis.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\AspireAARedis.ServiceDefaults.AssemblyInfo.cs
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\AspireAARedis.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\AspireAARedis.ServiceDefaults.dll
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\refint\AspireAARedis.ServiceDefaults.dll
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\AspireAARedis.ServiceDefaults.pdb
+C:\Users\cawa\source\repos\AspireAARedis\AspireAARedis.ServiceDefaults\obj\Debug\net8.0\ref\AspireAARedis.ServiceDefaults.dll
