@@ -41,11 +41,17 @@ Enter player name:
 
 @code {
     private Player[]? players;
-    string playerName;
-
+    string? playerName;
+ 
     private async Task PlayGame()
     {
+        if (string.IsNullOrWhiteSpace(playerName))
+        {
+            return;
+        }
         await LeaderboardApi.PostPlayerAsync(playerName);
+        players = await LeaderboardApi.GetLeaderboardAsync();
+        StateHasChanged();
     }
 
     protected override async Task OnInitializedAsync()
